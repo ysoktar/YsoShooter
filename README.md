@@ -129,3 +129,7 @@ CrawlerZombie jump() metodu ile zıplar. AcidSpittingZombie spit() metoduyla Aci
 ### AcidSpit
 
 ExplodingBullet sınıfından türer. COLOR statik renk değişkeni ve damage tam sayı değişkenini tutar.
+
+## TODO:
+
+Fix bugs, add sound...

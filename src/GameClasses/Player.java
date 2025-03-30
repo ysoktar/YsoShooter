@@ -108,6 +108,7 @@ public class Player extends GameMover {
             health = 0;
             state.lose();
         }
+        System.out.println("Health: " + health);
     }
 
     public void clearInputs() {

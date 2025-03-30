@@ -153,7 +153,7 @@ public class GamePanel extends JPanel implements Runnable {
         g.drawString("Toplam Puan: " + player.getScore(), PANEL_WIDTH - 300, 25);
 
         g.drawString("(" + (player.gunIndex + 1) + ") " + player.selectedGunName + ": ", 25, 25);
-        g.drawString(player.selectedGun.getTotalBullets() + " mermi ",
+        g.drawString(player.selectedGun.getTotalBullets() + " / " + player.selectedGun.getBullets() + " mermi ",
                 45 + 12 * player.lengthOfGunName, 25);
 
         g.setColor(Bullet.COLOR);
@@ -176,7 +176,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         g.setColor(Color.WHITE);
         g.drawString("Fps: " + averageFps, 20, PANEL_HEIGHT - 25);
-        g.drawString("Total Zombies: " + state.zombies.size(),
+        g.drawString("Toplam Zombi: " + state.zombies.size(),
                 PANEL_WIDTH - 200, PANEL_HEIGHT - 25);
     }
 
@@ -208,6 +208,7 @@ public class GamePanel extends JPanel implements Runnable {
                 50, PANEL_HEIGHT / 2 );
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, this);

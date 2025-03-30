@@ -38,6 +38,12 @@ public class GameState implements Serializable
             running = false;
             player.bullets.clear();
             unlockedGuns++;
+            if (player.INVINCIBLE)
+            {
+                player.INVINCIBLE = false;
+                refresh();
+                transition = false;
+            }
         }
     }
 
@@ -45,8 +51,8 @@ public class GameState implements Serializable
     {
         if (transition)
         {
-            player.INVINCIBLE = false;
             player.bullets.clear();
+            explosions.clear();
             wave++;
 
             GameWave gw = new GameWave(wave, player);
@@ -110,12 +116,12 @@ public class GameState implements Serializable
         {
             return;
         }
+        player.refresh();
         player.INVINCIBLE = true;
-        player.bullets.clear();
+
 
         GameWave gw = new GameWave(player, i);
         zombies.addAll(gw.getZombies());
-        ammos.addAll(gw.getAmmos());
 
         running = true;
     }

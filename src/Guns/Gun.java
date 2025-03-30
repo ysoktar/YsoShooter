@@ -69,4 +69,8 @@ public abstract class Gun implements Serializable {
         if (infiniteMagazines) return "Sonsuz";
         return Integer.toString(bullets + magazines * magazineCapacity);
     }
+
+    public int getBullets() {
+        return bullets;
+    }
 }

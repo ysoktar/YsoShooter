@@ -1,17 +1,17 @@
 package Guns;
 
+import GameClasses.GameObject;
+
 import java.awt.*;
 import java.io.Serializable;
 
-public class Explosion implements Serializable {
-    public int x;
-    public int y;
+public class Explosion extends GameObject implements Serializable {
     public int radius;
     public int damage = 15;
 
     public Explosion(int x, int y, int radius) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
+
         this.radius = radius;
     }
 

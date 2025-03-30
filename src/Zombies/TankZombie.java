@@ -12,5 +12,7 @@ public class TankZombie extends Zombie {
         this.damage = 5;
 
         this.icon = new ImageIcon("res/tank_zombie.png");
+
+        points = 15;
     }
 }

@@ -17,6 +17,8 @@ public class CrawlerZombie extends Zombie {
         this.damage = 2;
 
         this.icon = new ImageIcon("res/crawler_zombie.png");
+
+        points = 6;
     }
 
     public void jump() {

@@ -19,6 +19,8 @@ public class AcidSpittingZombie extends Zombie {
         this.damage = 2;
 
         this.icon = new ImageIcon("res/acid_spitting_zombie.png");
+
+        points = 12;
     }
 
     @Override

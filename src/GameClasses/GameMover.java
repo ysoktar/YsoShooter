@@ -25,6 +25,7 @@ public abstract class GameMover extends GameObject {
             ((Player) this).changeHealth(
                     -(((Zombie) mover).getDamage() + ((Player) this).state.getWave()));
         }
+        System.out.println(((Zombie) mover).getDamage());
     }
 
     public void move() {

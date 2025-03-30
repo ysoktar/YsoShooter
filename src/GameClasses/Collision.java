@@ -115,7 +115,7 @@ public class Collision implements Serializable {
 
         for (Zombie z : toHitZ) {
             if (z.hit()) {
-                player.changeScore(z.getPoints());
+                player.changeScore(z.getPoints() + player.state.getWave());
                 if (z instanceof AcidSpittingZombie) {
                     explosions.add(new Explosion(z.x, z.y, AcidSpittingZombie.explosionRadius));
                 }

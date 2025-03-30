@@ -17,12 +17,15 @@ public class Collision implements Serializable {
     LinkedList<Zombie> zombies;
     LinkedList<Explosion> explosions;
     LinkedList<Ammo> ammos;
+    LinkedList<HealthPack> healthPacks;
 
-    public Collision(Player player, LinkedList<Zombie> zombies, LinkedList<Explosion> explosions, LinkedList<Ammo> ammos) {
+    public Collision(Player player, LinkedList<Zombie> zombies, LinkedList<Explosion> explosions,
+                     LinkedList<Ammo> ammos, LinkedList<HealthPack> healthPacks) {
         this.player = player;
         this.zombies = zombies;
         this.explosions = explosions;
         this.ammos = ammos;
+        this.healthPacks = healthPacks;
     }
 
     public void detectCollisions() {
@@ -30,6 +33,7 @@ public class Collision implements Serializable {
         List<Bullet> toRemoveB = new ArrayList<>();
         List<Explosion> toRemoveE = new ArrayList<>();
         List<Ammo> toRemoveA = new ArrayList<>();
+        List<HealthPack> toRemoveHP = new ArrayList<>();
 
         int length = zombies.size();
         Iterator<Zombie> iter = zombies.iterator();
@@ -91,9 +95,21 @@ public class Collision implements Serializable {
         for (Ammo ammo : ammos) {
             double distance = Math.sqrt((ammo.x - player.x) * (ammo.x - player.x) +
                     (ammo.y - player.y) * (ammo.y - player.y));
-            if (distance < ammo.radius && gunType == ammo.getType()) {
+            if (distance < ammo.radius + GameMover.collisionRadius && gunType == ammo.getType())
+            {
                 gun.addMagazine();
                 toRemoveA.add(ammo);
+            }
+        }
+
+        for (HealthPack hp : healthPacks)
+        {
+            double distance = Math.sqrt((player.x - hp.x) * (player.x - hp.x) +
+                    (player.y - hp.y) * (player.y - hp.y));
+            if (distance < hp.radius + GameMover.collisionRadius)
+            {
+                player.changeHealth(hp.health);
+                toRemoveHP.add(hp);
             }
         }
 
@@ -106,6 +122,7 @@ public class Collision implements Serializable {
                 zombies.remove(z);
             }
         }
+
         for (Bullet b : toRemoveB) {
             if (b instanceof ExplodingBullet) {
                 explosions.add(new Explosion(b.x, b.y, ExplodingBullet.radius));
@@ -117,6 +134,10 @@ public class Collision implements Serializable {
         }
         for (Ammo ammo : toRemoveA) {
             ammos.remove(ammo);
+        }
+        for (HealthPack hp : toRemoveHP)
+        {
+            healthPacks.remove(hp);
         }
     }
 

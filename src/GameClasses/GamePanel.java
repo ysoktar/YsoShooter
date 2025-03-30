@@ -45,7 +45,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.state = new GameState();
         this.player = state.player;
 
-        collision = new Collision(player, state.zombies, state.explosions, state.ammos);
+        collision = new Collision(player, state.zombies, state.explosions, state.ammos,
+                state.healthPacks);
 
         GameInput input = new GameInput(state, this);
         addKeyListener(input);
@@ -126,9 +127,19 @@ public class GamePanel extends JPanel implements Runnable {
 
         for (Ammo ammo : state.ammos) {
             g.setColor(Color.BLACK);
-            g.fillOval(ammo.x - ammo.radius / 2, ammo.y - ammo.radius / 2, ammo.radius, ammo.radius);
+            g.fillOval(ammo.x - ammo.radius, ammo.y - ammo.radius,
+                    ammo.radius * 2, ammo.radius * 2);
             g.setColor(Color.WHITE);
             g.drawString("" + ammo.getType(), ammo.x, ammo.y);
+        }
+
+        for(HealthPack hp : state.healthPacks)
+        {
+            g.setColor(Color.WHITE);
+            g.fillOval(hp.x - hp.radius, hp.y - hp.radius,
+                    hp.radius * 2, hp.radius * 2);
+            g.setColor(Color.BLACK);
+            g.drawString("C", hp.x - hp.radius * 3 / 4, hp.y + hp.radius * 2 / 3);
         }
 
         AffineTransform backup = g.getTransform();

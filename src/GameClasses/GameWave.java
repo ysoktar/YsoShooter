@@ -12,17 +12,22 @@ import java.util.LinkedList;
 public class GameWave {
     private final LinkedList<Zombie> zombies = new LinkedList<>();
     private final LinkedList<Ammo> ammos = new LinkedList<>();
+    private final LinkedList<HealthPack> healthPacks = new LinkedList<>();
 
     public GameWave(int wave, Player player) {
         switch (wave) {
             case 1:
                 addZombie(0, 5, player);
+
+                addHealthPack(1);
                 break;
             case 2:
                 addZombie(0, 5, player);
                 addZombie(1, 1, player);
 
                 addAmmo(2, 5);
+
+                addHealthPack(2);
                 break;
             case 3:
                 addZombie(0, 5, player);
@@ -31,6 +36,8 @@ public class GameWave {
 
                 addAmmo(2, 6);
                 addAmmo(3, 8);
+
+                addHealthPack(3);
                 break;
             case 4:
                 addZombie(0, 3, player);
@@ -41,6 +48,8 @@ public class GameWave {
                 addAmmo(2, 3);
                 addAmmo(3, 2);
                 addAmmo(4, 6);
+
+                addHealthPack(4);
                 break;
             case 5:
                 addZombie(0, 4, player);
@@ -52,6 +61,8 @@ public class GameWave {
                 addAmmo(3, 3);
                 addAmmo(4, 2);
                 addAmmo(5, 5);
+
+                addHealthPack(5);
                 break;
             default:
                 addZombie(3, 10, player);
@@ -59,6 +70,8 @@ public class GameWave {
                 addAmmo(3, 5);
                 addAmmo(4, 5);
                 addAmmo(5, 5);
+
+                addHealthPack(6);
         }
     }
 
@@ -112,11 +125,24 @@ public class GameWave {
         }
     }
 
-    public LinkedList<Zombie> getZombies() {
+    private void addHealthPack(int n) {
+        for (int i = 0; i < n; i++) {
+            int x = (int) (Math.random() * (GamePanel.PANEL_WIDTH - 30)) + 15;
+            int y = (int) (Math.random() * (GamePanel.PANEL_HEIGHT- 30)) + 15;
+            healthPacks.add(new HealthPack(x, y));
+        }
+    }
+
+    public Collection<Zombie> getZombies() {
         return zombies;
     }
 
     public Collection<Ammo> getAmmos() {
         return ammos;
+    }
+
+    public Collection<HealthPack> getHealthPacks()
+    {
+        return healthPacks;
     }
 }

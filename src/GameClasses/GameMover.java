@@ -16,8 +16,6 @@ public abstract class GameMover extends GameObject {
     boolean right = false;
     protected int speed = 5;
 
-    private long lastTime = System.currentTimeMillis();
-
     public GameMover(int x, int y) {
         super(x, y);
     }
@@ -58,10 +56,8 @@ public abstract class GameMover extends GameObject {
                 this.rotation = Math.atan2(rdy, rdx);
             }
 
-            long time = System.currentTimeMillis() - lastTime;
-            if (player.reload && time > 1500) {
+            if (player.reload) {
                 player.selectedGun.reload();
-                lastTime = System.currentTimeMillis();
             }
 
             ArrayList<Bullet> removeList = new ArrayList<>();

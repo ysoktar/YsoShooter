@@ -16,6 +16,7 @@ public class GameState implements Serializable
     public LinkedList<Zombie> zombies = new LinkedList<>();
     public LinkedList<Explosion> explosions = new LinkedList<>();
     public LinkedList<Ammo> ammos = new LinkedList<>();
+    public LinkedList<HealthPack> healthPacks = new LinkedList<>();
 
     boolean running = true;
     private int wave = 1;
@@ -28,6 +29,8 @@ public class GameState implements Serializable
 
         GameWave gw = new GameWave(wave, this.player);
         zombies.addAll(gw.getZombies());
+        ammos.addAll(gw.getAmmos());
+        healthPacks.addAll(gw.getHealthPacks());
     }
 
     public void checkState()
@@ -38,12 +41,12 @@ public class GameState implements Serializable
             running = false;
             player.bullets.clear();
             unlockedGuns++;
-            if (player.INVINCIBLE)
-            {
-                player.INVINCIBLE = false;
-                refresh();
-                transition = false;
-            }
+        }
+        else if (zombies.isEmpty() && player.INVINCIBLE)
+        {
+            player.INVINCIBLE = false;
+            refresh();
+            transition = false;
         }
     }
 
@@ -58,6 +61,7 @@ public class GameState implements Serializable
             GameWave gw = new GameWave(wave, player);
             zombies.addAll(gw.getZombies());
             ammos.addAll(gw.getAmmos());
+            healthPacks.addAll(gw.getHealthPacks());
 
             transition = false;
             running = true;
@@ -98,6 +102,7 @@ public class GameState implements Serializable
         zombies.clear();
         explosions.clear();
         ammos.clear();
+        healthPacks.clear();
 
         player.changeGun(unlockedGuns);
         GameWave gw = new GameWave(wave, player);
@@ -118,7 +123,6 @@ public class GameState implements Serializable
         }
         player.refresh();
         player.INVINCIBLE = true;
-
 
         GameWave gw = new GameWave(player, i);
         zombies.addAll(gw.getZombies());

@@ -108,7 +108,6 @@ public class Player extends GameMover {
             health = 0;
             state.lose();
         }
-        System.out.println("Health: " + health);
     }
 
     public void clearInputs() {
@@ -122,13 +121,15 @@ public class Player extends GameMover {
 
     public void refresh() {
         clearInputs();
+
         x = GamePanel.PANEL_WIDTH / 2;
         y = GamePanel.PANEL_HEIGHT / 2;
         health = 100;
         score = 0;
-        bullets.clear();
 
-        inventory = new ArrayList<>();
+        bullets.clear();
+        acidSpits.clear();
+        inventory.clear();
         inventory.add(new Pistol());
         inventory.add(new AssaultRifle());
         inventory.add(new Shotgun());

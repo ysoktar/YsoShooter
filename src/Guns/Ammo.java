@@ -7,7 +7,7 @@ public class Ammo extends GameObject {
     int type;
 
     public Ammo(int type, int x, int y) {
-        this(type, x, y, 30);
+        this(type, x, y, 15);
     }
 
     public Ammo(int type, int x, int y, int radius) {

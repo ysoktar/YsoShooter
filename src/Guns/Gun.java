@@ -37,7 +37,7 @@ public abstract class Gun implements Serializable {
             return true;
         }
 
-        if (magazines > 0) {
+        if (magazines > 0 && bullets == 0) {
             magazines--;
             bullets = magazineCapacity;
             return true;
